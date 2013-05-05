@@ -319,20 +319,17 @@ namespace InterPrep
         /// </summary>
         public static SinglyLinkeList<T> SwapEveryTwoNodes(SinglyLinkeList<T> linkedList)
         {
-            if (linkedList == null)
-                return linkedList;
+            if (linkedList == null || linkedList.Head == null)
+                return null;
 
             Node<T> current = linkedList.Head;
-            
-            if (current == null)
-                return linkedList;
             
             while (current != null && current.Next != null)
             {                
                 var temp = current.Next.Data;
-
                 current.Next.Data = current.Data;    
                 current.Data = temp;
+
                 current = current.Next.Next;
             }
 
