@@ -181,7 +181,7 @@ namespace InterPrep
             }
 
             // using multiplication
-            while ((result+1) * denominator <= numerator)
+            for (int i = 1; i * denominator <= numerator; i++)
             {
                 result++;
             }
@@ -204,12 +204,12 @@ namespace InterPrep
 
             if (numerator < 0)
             {
-                numerator = -numerator;
+                numerator *= -1;
                 sign = -1;
             }
             if (denominator < 0)
             {
-                denominator = -denominator;
+                denominator *= -1;
                 sign *= -1;
             }
 
@@ -219,7 +219,7 @@ namespace InterPrep
                 result++;
             }
 
-            return result * sign;
+            return sign * result;
         }
 
         // Q: Multiply two integers without using multiplication, division and bitwise operators, and no loops

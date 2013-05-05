@@ -25,17 +25,19 @@ namespace InterPrep
     {
         static void Main(string[] args)
         {
-            DerivedClass B = new DerivedClass();
-            BaseClass A = (BaseClass)B;
+            DerivedClass D = new DerivedClass();
+            BaseClass B = (BaseClass)D;
 
             // Compile-time type of the instance
+            D.NonVirtualMethod();
             B.NonVirtualMethod();
-            A.NonVirtualMethod();
 
             // Run-time type of the instance
-            B.VirtulMethod();
-            A.VirtulMethod(); // VirtulMethod from DerivedClass!
-            Debug.Assert(A.GetType() == typeof(DerivedClass));
+            D.VirtulMethod();
+            B.VirtulMethod(); // VirtulMethod from DerivedClass!
+            
+            Debug.Assert(D.GetType() == typeof(DerivedClass));
+            Debug.Assert(B.GetType() == typeof(DerivedClass));
 
             Console.ReadLine();
         }
