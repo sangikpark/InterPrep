@@ -299,7 +299,7 @@ namespace InterPrep
                 rhs = rhs.Next;
             }
 
-            int sumInt = sumInt = leftInt + rightInt;
+            int sumInt = leftInt + rightInt;
 
             string sumString = sumInt.ToString();
 
