@@ -361,6 +361,27 @@ namespace InterPrep
             current.Next = node;
         }
 
+        // Q: Remove duplicates from an unsorted linked list.
+        public static void RemoveDuplicates(Node<T> node)
+        {
+            Hashtable ht = new Hashtable();
+            Node<T> prev = null;
+
+            while (node != null)
+            {
+                if (ht.Contains(node))
+                {
+                    prev.Next = node.Next;
+                }
+                else
+                {
+                    ht.Add(node, null);
+                    prev = node;
+                }
+                node = node.Next;
+            }
+        }
+
         public static void Print(Node<T> node)
         {
             while (node != null)
