@@ -71,7 +71,7 @@ namespace InterPrep
 
     	// Iterative solution
         public static int FactorialIterative(int n)
-	    {
+        {
 	        int f = 1;
 	        for (int i = n; i > 1; i--)
 	            f *= i;
@@ -126,10 +126,10 @@ namespace InterPrep
             int[] n2 = new int[max];
 
             for (int i = 0; i < num1.Length; i++)
-                n1[i] = num1[num1.Length - i - 1] - 48;
+                n1[i] = num1[num1.Length - i - 1] - 48; // 48 = (int) '0'
 
             for (int i = 0; i < num2.Length; i++)
-                n2[i] = num1[num2.Length - i - 1] - 48;
+                n2[i] = num2[num2.Length - i - 1] - 48;
 
 
             int carry = 0;
@@ -137,14 +137,16 @@ namespace InterPrep
 
             for (int i = 0; i < max; i++)
             {
-                sum[i] = (n1[i] + n2[i] + carry) % 10;
+                int s = n1[i] + n2[i] + carry;                
 
-                if ((n1[i] + n2[i] + carry) >= 10)
+                if (s >= 10)
                 {
+                    sum[i] =  s % 10;
                     carry = 1;
                 }
                 else
                 {
+                    sum[i] = s;
                     carry = 0;
                 }
             }
