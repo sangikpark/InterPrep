@@ -112,7 +112,7 @@ namespace InterPrep
                 array[string1[i] - 'a']++;
             }
 
-            for (int j = 0; j < string1.Length; j++)
+            for (int j = 0; j < string2.Length; j++)
             {
                 array[string2[j] - 'a']--;
             }
