@@ -424,7 +424,7 @@ namespace InterPrep
             queue = new Queue<ATreeNode>();
         }
 
-        public bool Traverse()
+        public void Traverse()
         {
             ATreeNode current;
             queue.Enqueue(root);
@@ -439,22 +439,24 @@ namespace InterPrep
 
                 Console.Write(" " + current.Data);                
 
-                foreach (ATreeNode node in current.Children)
+                if (current.Children != null)
                 {
-                    queue.Enqueue(node);
-                    nodesInNextLevel++;
+                    foreach (ATreeNode node in current.Children)
+                    {
+                        queue.Enqueue(node);
+                        nodesInNextLevel++;
+                    }
                 }
 
                 if (nodesInCurrentLevel == 0)
                 {
-                    Console.Write(',');
+                    if (queue.Count > 0)
+                        Console.Write(',');
                     nodesInCurrentLevel = nodesInNextLevel;
                     nodesInNextLevel = 0;                    
                 }
             }
-            return false;
         }
-
     }
  
     class Program
