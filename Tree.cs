@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -140,7 +140,7 @@ namespace InterPrep
             {
                 return false;
             }
-            
+
             if ((node.Right != null) && node.Data.CompareTo(node.Right.Data) > 0)
             {
                 return false;
@@ -297,7 +297,7 @@ namespace InterPrep
             }
             return 1 + Math.Min(MinDepth(node.Left), MinDepth(node.Right));
         }
-       
+
         public bool IsBalanced(TreeNode<T> node)
         {
             return (MaxDepth(node) - MinDepth(node) <= 1);
@@ -355,7 +355,7 @@ namespace InterPrep
                     if (current.Right != null)
                         stack.Push(current.Right);
                     if (current.Left != null)
-                        stack.Push(current.Left);                                        
+                        stack.Push(current.Left);
                 }
             }
             return false;
@@ -399,18 +399,18 @@ namespace InterPrep
         }
     }
 
-    // Q: Give the arbitrary tree        
+    // Q: Given the arbitrary tree
     //           1
     //         / \ \
     //       -2  0  3
     //       / \     \
-    //     -1   5     4 
+    //     -1   5     4
     //
     // Write function to output as 1, -2 0 3, -1 5 4
     public class ATreeNode
     {
         public int Data;
-        public ATreeNode[] Children;        
+        public ATreeNode[] Children;
     }
 
     public class BFS
@@ -437,7 +437,7 @@ namespace InterPrep
                 current = queue.Dequeue();
                 nodesInCurrentLevel--;
 
-                Console.Write(" " + current.Data);                
+                Console.Write(" " + current.Data);
 
                 if (current.Children != null)
                 {
@@ -453,25 +453,70 @@ namespace InterPrep
                     if (queue.Count > 0)
                         Console.Write(',');
                     nodesInCurrentLevel = nodesInNextLevel;
-                    nodesInNextLevel = 0;                    
+                    nodesInNextLevel = 0;
                 }
             }
         }
     }
- 
+
+    class BENode
+    {
+        public char Data;
+        public BENode Left;
+        public BENode Right;
+    }
+
+    class BinaryExpressionTree
+    {
+        // Q: Given the binary expression tree (node can be +, * or integer)
+        //           +
+        //         /   \
+        //        +     *
+        //       / \   / \
+        //      1   * 4   5
+        //         / \
+        //        2   3
+        // = ( 1 + ( 2 * 3 ) ) + ( 4 * 5 ) = 27
+        // Write EvaluateTree() function
+        public static int EvaluateTree(BENode node)
+        {
+            if (node == null)
+            {
+                return 0;
+            }
+
+            if (node.Left == null && node.Right == null)
+            {
+                return node.Data - '0'; // This is a leaf node.
+            }
+
+            int left, right;
+            left = EvaluateTree(node.Left);
+            right = EvaluateTree(node.Right);
+
+            int result = 0;
+            if (node.Data == '+')
+            {
+                result = left + right;
+            }
+            else if (node.Data == '*')
+            {
+                result = left * right;
+            }
+            else
+            {
+                throw new NotSupportedException();
+            }
+
+            return result;
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
             BinarySearchTree<int> intBST = new BinarySearchTree<int>();
-
-            //
-            //            3
-            //         /     \
-            //       1         5
-            //         \     /   \
-            //          2   4      6
-            //
             intBST.Insert(3);
             intBST.Insert(1);
             intBST.Insert(2);
@@ -482,10 +527,10 @@ namespace InterPrep
             Debug.Assert(intBST.IsBST(intBST.Root) == true);
 
             Console.WriteLine("Tree: " + intBST);
-            
+
             Debug.Assert(intBST.Find_Iterative(4) == 4);
             Debug.Assert(intBST.Find_Recursive(4) == 4);
-            
+
             Debug.Assert(intBST.FindMin() == 1);
             Debug.Assert(intBST.FindMax() == 6);
 
@@ -511,7 +556,47 @@ namespace InterPrep
             BreadthFirstSearch<int> bfs = new BreadthFirstSearch<int>(intBST.Root);
             Debug.Assert(bfs.Search(6) == true);
 
+            BENode node2 = new BENode();
+            node2.Data = '+';
+            
+            BENode node3 = new BENode();
+            node3.Data = '*';
+
+            BENode node4 = new BENode();
+            node4.Data = '1';
+
+            BENode node5 = new BENode();
+            node5.Data = '*';
+
+            BENode node6 = new BENode();
+            node6.Data = '4';
+
+            BENode node7 = new BENode();
+            node7.Data = '5';
+
+            BENode node8 = new BENode();
+            node8.Data = '2';
+
+            BENode node9 = new BENode();
+            node9.Data = '3';
+
+            BENode root = new BENode();
+            root.Data = '+';
+            root.Left = node2;
+            root.Right = node3;
+
+            node2.Left = node4;
+            node2.Right = node5;
+
+            node5.Left = node8;
+            node5.Right = node9;
+
+            node3.Left = node6;
+            node3.Right = node7;
+
+            int result = BinaryExpressionTree.EvaluateTree(root);
+
             Console.ReadLine();
         }
-     }
+    }
 }
