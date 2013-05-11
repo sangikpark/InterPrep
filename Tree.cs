@@ -490,9 +490,8 @@ namespace InterPrep
                 return node.Data - '0'; // This is a leaf node.
             }
 
-            int left, right;
-            left = EvaluateTree(node.Left);
-            right = EvaluateTree(node.Right);
+            int left = EvaluateTree(node.Left);
+            int right = EvaluateTree(node.Right);
 
             int result = 0;
             if (node.Data == '+')
