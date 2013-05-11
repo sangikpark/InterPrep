@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -112,7 +112,7 @@ namespace InterPrep
                 array[string1[i] - 'a']++;
             }
 
-            for (int j = 0; j < string2.Length; j++)
+            for (int j = 0; j < string1.Length; j++)
             {
                 array[string2[j] - 'a']--;
             }
@@ -290,7 +290,7 @@ namespace InterPrep
                     count++;
                 }
                 else
-                {                    
+                {
                     index = runner;
                     count = 1;
                 }
@@ -366,6 +366,54 @@ namespace InterPrep
             }
 
             return result.ToString();
+        }
+    }
+
+    // Q: Write a function to evaluate prefix expression.
+    // + 2 3 = ( 2 + 3 )
+    // * + 1 2 5 = ( ( 1 + 2 ) * 5)
+    class PrefixExpression
+    {
+        public static int Evaluate(string expression)
+        {
+            if (string.IsNullOrEmpty(expression))
+            {
+                return 0;
+            }
+
+            index = 0;
+
+            string[] array = expression.Split(' ');
+
+            return Evaluate(array);
+        }
+
+        private static int index;
+        private static int Evaluate(string[] array)
+        {
+            char token = Char.Parse((array[index++]));
+
+            if (token >= '0' && token <= '9')
+            {
+                return token - '0';
+            }
+            else
+            {
+                int left = Evaluate(array);
+                int right = Evaluate(array);
+
+                int result = 0;
+                if (token == '+')
+                {
+                    result = left + right;
+                }
+                else if (token == '*')
+                {
+                    result = left * right;
+                }
+
+                return result;
+            }
         }
     }
 
@@ -606,6 +654,10 @@ namespace InterPrep
             string in1 = "aaaaabbbbbbbcccbbbbcccdddddaaaab";
             string s = StringEx.RunLengthEncoding(in1);
             string s1 = StringEx.RunLengthDecoding(s);
+
+            Debug.Assert(PrefixExpression.Evaluate("5") == 5);
+            Debug.Assert(PrefixExpression.Evaluate("* + 1 2 5") == 15);
+            Debug.Assert(PrefixExpression.Evaluate("+ * 1 2 * 3 4") == 14);
 
             int largestStartIndex = StringEx.FindLargetstBlock("abeeeeefeegkkkkkkkkf");
 
