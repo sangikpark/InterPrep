@@ -367,6 +367,37 @@ namespace InterPrep
 
             return result.ToString();
         }
+        
+        // Q: Find most frequent word in a string.
+        public static string FindMostFrequent(string input)
+        {
+            string[] words = input.ToLower().Split(' ');
+
+            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+
+            foreach (string word in words)
+            {
+                if (!dictionary.ContainsKey(word))
+                {
+                    dictionary.Add(word, 1);
+                }
+                else
+                {
+                    dictionary[word] = dictionary[word] + 1;
+                }
+            }
+
+            List<KeyValuePair<string, int>> result = (
+                from pair in dictionary
+                orderby pair.Value descending
+                select pair
+                ).Take(1).ToList();
+
+            if (result != null && result.Count == 1)
+            {
+                Console.WriteLine(result[0].Key);
+            }
+        }
     }
 
     // Q: Write a function to evaluate prefix expression.
