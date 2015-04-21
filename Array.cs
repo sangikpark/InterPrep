@@ -48,7 +48,7 @@ namespace InterPrep
         // if (head + tail) == 10, then increment head and decrement tail
         public static void FindPair(int[] array, int n)
         {
-            // Array is assumed to be sorted in descending order
+            // Array is assumed to be sorted in ascending order
             
             int head = 0;
             int tail = array.Length - 1;
