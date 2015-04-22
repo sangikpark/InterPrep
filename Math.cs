@@ -89,7 +89,7 @@ namespace InterPrep
 
 
         // Prime number - A prime number is divisible only by 1 and itself
-	    // 2, 3, 5, 7, 11, 13, 17, 19...
+	// 2, 3, 5, 7, 11, 13, 17, 19...
         public static bool IsPrime(int num)
         {
             bool isPrime = true;
@@ -156,7 +156,7 @@ namespace InterPrep
             return sum;
         }
 
-        // Q: Implement divide method without using / operator
+        // Q: Implement divide method without using * operator
         public static int DivideUsingMultiplication(int numerator, int denominator)
         {
             int result = 0;
