@@ -189,7 +189,7 @@ namespace InterPrep
             return sign * result;
         }
 
-        // Q: Implement divide method without using / operator
+        // Q: Implement divide method without using - operator
         public static int DivideUsingSubtraction(int numerator, int denominator)
         {
             int result = 0;
