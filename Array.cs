@@ -108,45 +108,6 @@ namespace InterPrep
 
             return false;
         }
-
-        // N machines
-        // Each machine has M integers sorted in increasing order
-        // Find K smallest integers across all machines
-        public static void FindSmallestNumber(int k)
-        {
-            // N = 3
-            // M = 10
-            const int N = 3;
-            const int M = 10;
-
-            int[,] array = new int[N, M] { 
-                                        { 1, 3, 5, 6, 7, 8, 10, 11, 13, 20 },
-                                        { 4, 5, 7, 17, 20, 25, 26, 28, 30, 32 },
-                                        { 2, 4, 5, 13, 15, 16, 17, 18, 19, 21 } };
-
-            int[] currentIndex = new int[N] { 0, 0, 0 }; // Current index for each machine.
-
-            for (int i = 0; i < k; i++)
-            {
-                int smallestInteger = 0;
-                int foundMachineIndex = 0;
-
-                for (int j = 0; j < N; j++)
-                {
-                    int currentInteger = array[j, currentIndex[j]];
-
-                    if (j == 0 || currentInteger < smallestInteger)
-                    {
-                        smallestInteger = currentInteger;
-                        foundMachineIndex = j;
-                    }
-                }
-
-                currentIndex[foundMachineIndex]++;
-
-                System.Console.WriteLine(smallestInteger);
-            }
-        }
         
         // Q: Find the second highest number in an unsorted array
         public static void FindHighestNumbers(int[] array)
