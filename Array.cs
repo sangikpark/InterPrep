@@ -147,36 +147,7 @@ namespace InterPrep
                 System.Console.WriteLine(smallestInteger);
             }
         }
-
-        // Q: Given an n x n matrix, where every row and column is sorted in increasing order. 
-        // Given a number x, how to decide whether this x is in the matrix. The designed algorithm should have linear time complexity.
-        //
-        // 1. Start with top right
-        // 2. Loop
-        //  a. e == x; return true
-        //  b. e > x; move left
-        //  c. e < x; move down
-        bool SearchMatrix(int[,] m, int n, int x)
-        {
-            if (n == 0)
-                return false;
-
-            int r = 0, c = n - 1; // top right
-            while (r < n && c >= 0)
-            {
-                int e = m[r,c];
-
-                if (e == x)
-                    return true;
-                else if (e > x)
-                    c--; // move left
-                else // if (e < x)
-                    r++; // move down
-            }
-
-            return false;
-        }
-
+        
         // Q: Find the second highest number in an unsorted array
         public static void FindHighestNumbers(int[] array)
         {
@@ -201,43 +172,6 @@ namespace InterPrep
                 {
                     third = n;
                 }
-            }
-        }
-
-        // Q: In NxN matrix, if an element is 'a', its entire row and column are set to 'a'.
-        // a b c    a a a
-        // d e f -> a e g
-        // g h i    a c d
-        public static void ReplaceMatrix(char[,] matrix, char ch)
-        {
-            int rowLength = matrix.GetLength(0);
-            int colLength = matrix.GetLength(1);
-
-            bool[] row = new bool[rowLength];
-            bool[] col = new bool[colLength];
-
-            for (int i = 0; i < rowLength; i++)
-            {
-                for (int j = 0; j < colLength; j++)
-                {
-                    if (matrix[i, j] == ch)
-                    {
-                        row[i] = true;
-                        col[j] = true;
-                    }
-                }
-            }
-
-            for (int i = 0; i < rowLength; i++)
-            {
-                for (int j = 0; j < colLength; j++)
-                {
-                    if (row[i] == true || col[j] == true)
-                        matrix[i, j] = ch;
-
-                    Console.Write(matrix[i, j]);
-                }
-                Console.Write("\r\n");
             }
         }
     }
@@ -314,10 +248,6 @@ namespace InterPrep
             ArrayEx.ThreeSum(new List<int> { -25, -10, -7, -3, 2, 4, 8, 10 });
 
             ArrayEx.FindSmallestNumber(10);
-
-            char[,] matrix = new char[3,3] { {'a', 'b', 'c'}, {'d', 'e', 'f'}, {'g', 'h', 'i'}};
-
-            ArrayEx.ReplaceMatrix(matrix, 'a');
         }
     }
 }
