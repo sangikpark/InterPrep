@@ -207,8 +207,6 @@ namespace InterPrep
             ArrayEx.Remove(A, B, ref C);
 
             ArrayEx.ThreeSum(new List<int> { -25, -10, -7, -3, 2, 4, 8, 10 });
-
-            ArrayEx.FindSmallestNumber(10);
         }
     }
 }
